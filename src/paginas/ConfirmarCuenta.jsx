@@ -30,7 +30,7 @@ const ConfirmarCuenta = () => {
       setCargando(false);
     };
     confirmarCuenta();
-  }, []);
+  }, []); 
 
   return (
     <>
@@ -46,7 +46,7 @@ const ConfirmarCuenta = () => {
 
         <div className="mt-5 flex flex-col items-center">
           <Link 
-            to="/login" 
+            to="/" 
             className="bg-indigo-700 w-full py-2 px-5 rounded-xl text-white uppercase font-bold mt-5 hover:cursor-pointer hover:bg-indigo-800 text-center"
           >
             Iniciar Sesión
