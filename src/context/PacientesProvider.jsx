@@ -38,7 +38,7 @@ export const PacientesProvider = ({children}) => {
 
     const guardarPaciente = async (paciente) => {
 
-        console.log(paciente)
+        // console.log(paciente)
 
         const token = localStorage.getItem('token')
             const config = {
