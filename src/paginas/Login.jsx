@@ -1,46 +1,49 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import Alerta from '../components/Alerta'
-import useAuth from '../hooks/useAuth'
-import clienteAxios from '../config/axios'
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Alerta from '../components/Alerta';
+import useAuth from '../hooks/useAuth';
+import clienteAxios from '../config/axios';
 
 const Login = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [alerta, setAlerta] = useState({})
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [alerta, setAlerta] = useState({});
 
-  const { setAuth } = useAuth()
-  const navigate = useNavigate()
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async e => {
-    e.preventDefault()
+    e.preventDefault();
 
     if ([email, password].includes('')) {
       setAlerta({
         msg: 'Todos los campos son obligatorios',
         error: true
-      })
-      return
+      });
+      return;
     }
 
     try {
       const { data } = await clienteAxios.post('/veterinarios/login', {
         email: email.toLowerCase(),
         password
-      })
+      });
 
-      localStorage.setItem('token', data.token)
-      setAuth(data)
-      navigate('/admin')
+      localStorage.setItem('token', data.token);
+      setAuth(data);
+      setAlerta({}); // Limpia errores anteriores
+
+      // ✅ Redirección explícita para Cypress
+      navigate('/admin', { replace: true });
     } catch (error) {
       setAlerta({
         msg: error.response?.data?.msg || 'Error al iniciar sesión',
         error: true
-      })
+      });
     }
-  }
+  };
 
-  const { msg } = alerta
+  const { msg } = alerta;
 
   return (
     <>
@@ -120,7 +123,7 @@ const Login = () => {
         </nav>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
