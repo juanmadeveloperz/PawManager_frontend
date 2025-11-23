@@ -1,37 +1,42 @@
-# 🧪 Cypress E2E Testing para Gestión de Pacientes Veterinarios
+# 🧪 Cypress E2E Demo – Gestión de Pacientes Veterinarios
 
-Este repositorio muestra cómo implementar pruebas end-to-end (E2E) con Cypress en una aplicación React para gestión de pacientes veterinarios.
+Este proyecto demuestra cómo implementar pruebas End-to-End (E2E) con Cypress en una aplicación React para gestión de pacientes veterinarios. Se automatizan los flujos clave del sistema, validando tanto la lógica de negocio como la interfaz de usuario.
 
 ---
 
-## ✅ Funcionalidades testeadas
+## 🚀 Funcionalidades testeadas
 
 - 🔐 Login de veterinario
 - 📝 Creación de paciente
 - ❌ Eliminación de paciente
-- ✅ Validación visual y funcional en el UI
-- 📦 Confirmación de backend con intercept
+- 👀 Validación visual en la UI
+- 📡 Confirmación de acciones vía intercept
 
 ---
 
 ## 🛠 Tecnologías utilizadas
 
-- **Frontend:** React + Vite
-- **Backend:** Node.js + MongoDB
-- **Testing:** Cypress
-- **Estilo:** TailwindCSS
-- **Linting:** ESLint + Prettier
+| Tecnología     | Uso                             |
+|----------------|----------------------------------|
+| React + Vite   | Frontend                        |
+| Cypress        | Testing End-to-End              |
+| Node.js        | Backend y API REST              |
+| TailwindCSS    | Estilos UI                      |
+| ESLint + Prettier | Calidad y formato de código |
 
 ---
 
 ## 📁 Estructura del proyecto
 
-cypress/ └── e2e/ ├── login.cy.jsx └── crearEliminarPaciente.cy.jsx
+cypress/ 
+└── e2e/ 
+  ├── login.cy.jsx 
+  └── crearEliminarPaciente.cy.jsx
 
 
 ---
 
-## 🧪 Ejemplo de test: Crear y eliminar paciente
+## 📌 Ejemplo de test: Crear y eliminar paciente
 
 ```jsx
 /// <reference types="cypress" />
@@ -82,15 +87,31 @@ describe('Crear y eliminar paciente con coincidencia completa', () => {
   });
 });
 
-🚀 Cómo ejecutar los tests
+🧪 Cómo ejecutar los tests
 
 # Instalar dependencias
 npm install
 
-# Levantar el proyecto (necesario para hacer los tests en el front)
+# Levantar el frontend
 npm run dev
 
 # Abrir Cypress en modo interactivo
 npx cypress open
+
+📘 Aprendizaje
+Este proyecto muestra:
+
+Cómo automatizar flujos completos en React con Cypress
+
+Validación visual y funcional de la UI
+
+Uso de interceptores para controlar peticiones HTTP
+
+Buenas prácticas en testing E2E para entornos reales
+
+👤 Autor
+Proyecto creado por Juan M. Espino Pastor
+
+  
 
 
