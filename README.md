@@ -1,45 +1,39 @@
-🧪 Testing End-to-End con Cypress – Login y Gestión de Pacientes
+# 🧪 Cypress E2E Testing para Gestión de Pacientes Veterinarios
 
-Este repositorio muestra cómo implementar pruebas E2E (end-to-end) con Cypress en una aplicación de gestión de pacientes veterinarios.
-Se automatizan los siguientes flujos principales:
+Este repositorio muestra cómo implementar pruebas end-to-end (E2E) con Cypress en una aplicación React para gestión de pacientes veterinarios.
 
-✅ Login de veterinario
-🆕 Creación de un paciente
-🗑️ Eliminación del paciente
-✔ Validación visual y funcional en la UI
-🔄 Confirmación de backend con cy.intercept()
+---
+
+## ✅ Funcionalidades testeadas
+
+- 🔐 Login de veterinario
+- 📝 Creación de paciente
+- ❌ Eliminación de paciente
+- ✅ Validación visual y funcional en el UI
+- 📦 Confirmación de backend con intercept
+
+---
+
+## 🛠 Tecnologías utilizadas
+
+- **Frontend:** React + Vite
+- **Backend:** Node.js + MongoDB
+- **Testing:** Cypress
+- **Estilo:** TailwindCSS
+- **Linting:** ESLint + Prettier
+
+---
+
+## 📁 Estructura del proyecto
+
+cypress/ └── e2e/ ├── login.cy.jsx └── crearEliminarPaciente.cy.jsx
 
 
-🚀 Tecnologías Utilizadas
-Tecnología	Uso
-React.js	Interfaz del sistema de pacientes
-Cypress	Testing End-to-End
-Vite	Entorno de desarrollo frontend
-Node.js	Backend y API
-TailwindCSS	Estilos UI
-ESLint + Prettier	Calidad y formateo de código
-📂 Estructura del Proyecto (Tests E2E)
-cypress/
- └── e2e/
-     ├── login.cy.js
-     └── crearEliminarPaciente.cy.js
+---
 
-🧪 Test 1 – Login (login.cy.js)
-/// <reference types="cypress" />
-describe('Login de veterinario', () => {
-  it('debería loguearse correctamente', () => {
-    cy.visit('http://localhost:5173');
+## 🧪 Ejemplo de test: Crear y eliminar paciente
 
-    cy.get('input[name="email"]').type('pruebas@correo.com');
-    cy.get('input[name="password"]').type('123456');
-    cy.get('input[type="submit"]').click();
-
-    cy.url().should('include', '/admin');
-    cy.contains('Administrador de Pacientes').should('exist');
-  });
-});
-
-🧪 Test 2 – Crear y Eliminar Paciente (crearEliminarPaciente.cy.js)
+```jsx
 /// <reference types="cypress" />
 
 describe('Crear y eliminar paciente con coincidencia completa', () => {
@@ -53,7 +47,6 @@ describe('Crear y eliminar paciente con coincidencia completa', () => {
 
   beforeEach(() => {
     cy.on('window:confirm', () => true);
-
     cy.visit('/');
     cy.get('input[name="email"]').type('pruebas@correo.com');
     cy.get('input[name="password"]').type('123456');
@@ -62,11 +55,11 @@ describe('Crear y eliminar paciente con coincidencia completa', () => {
   });
 
   it('debería crear y luego eliminar un paciente correctamente', () => {
-    cy.get('#nombre').clear().type(paciente.nombre);
-    cy.get('#propietario').clear().type(paciente.propietario);
-    cy.get('#email').clear().type(paciente.email);
-    cy.get('#fecha').clear().type(paciente.fecha);
-    cy.get('#sintomas').clear().type(paciente.sintomas);
+    cy.get('#nombre').clear(); cy.get('#nombre').type(paciente.nombre);
+    cy.get('#propietario').clear(); cy.get('#propietario').type(paciente.propietario);
+    cy.get('#email').clear(); cy.get('#email').type(paciente.email);
+    cy.get('#fecha').clear(); cy.get('#fecha').type(paciente.fecha);
+    cy.get('#sintomas').clear(); cy.get('#sintomas').type(paciente.sintomas);
     cy.get('input[type="submit"]').click();
 
     cy.contains(paciente.nombre).should('exist');
@@ -84,37 +77,20 @@ describe('Crear y eliminar paciente con coincidencia completa', () => {
       });
 
     cy.wait('@eliminarPaciente');
-
     cy.contains(paciente.email, { timeout: 6000 }).should('not.exist');
     cy.contains(paciente.sintomas).should('not.exist');
   });
 });
 
-▶️ Cómo ejecutar los tests
+🚀 Cómo ejecutar los tests
+
 # Instalar dependencias
 npm install
 
-# Levantar el proyecto (necesario para hacer los test en el front)
+# Levantar el proyecto (necesario para hacer los tests en el front)
 npm run dev
 
 # Abrir Cypress en modo interactivo
 npx cypress open
 
-# Ejecutar en modo headless
-npx cypress run
 
-🌟 ¿Qué validan estos tests?
-Validación	Estado
-Autenticación (login)	✔
-CRUD (Create + Delete)	✔
-UI + API conectadas correctamente	✔
-Interceptación de requests con cy.intercept()	✔
-Verificación de contenido dinámico y fecha formateada	✔
-💡 Mejoras futuras
-
-🔹 Automatizar la edición de un paciente
-🔹 Implementar Page Objects
-🔹 Integración con CI/CD (GitHub Actions)
-🔹 Reportes visuales (Allure / Mochawesome)
-
-📌 Proyecto creado con fines educativos y de demostración profesional.
